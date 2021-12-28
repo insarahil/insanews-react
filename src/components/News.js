@@ -55,17 +55,16 @@ export default class News extends Component {
     };
   }
   async componentDidMount() {
-    let apiurl =
-      "https://newsapi.org/v2/top-headlines?country=us&apiKey=be308d15421f46afbe4ec30ce9d67f54&page=1";
+    let apiurl = `https://newsapi.org/v2/top-headlines?country=us&category=${this.props.category}&apiKey=be308d15421f46afbe4ec30ce9d67f54&page=1`;
     let data = await fetch(apiurl);
     let parseData = await data.json();
     this.setState({ articles: parseData.articles });
   }
   handlPervClick = async () => {
     console.log("prev");
-    let apiurl = `https://newsapi.org/v2/top-headlines?country=us&apiKey=be308d15421f46afbe4ec30ce9d67f54&page=${
-      this.state.page - 1
-    }`;
+    let apiurl = `https://newsapi.org/v2/top-headlines?country=us&category=${
+      this.props.category
+    }&apiKey=be308d15421f46afbe4ec30ce9d67f54&page=${this.state.page - 1}`;
     let data = await fetch(apiurl);
     let parseData = await data.json();
     this.setState({
@@ -75,9 +74,9 @@ export default class News extends Component {
   };
   handlNextClick = async () => {
     console.log("next");
-    let apiurl = `https://newsapi.org/v2/top-headlines?country=us&apiKey=be308d15421f46afbe4ec30ce9d67f54&page=${
-      this.state.page + 1
-    }`;
+    let apiurl = `https://newsapi.org/v2/top-headlines?country=us&category=${
+      this.props.category
+    }&apiKey=be308d15421f46afbe4ec30ce9d67f54&page=${this.state.page + 1}`;
     let data = await fetch(apiurl);
     let parseData = await data.json();
     this.setState({
@@ -90,6 +89,8 @@ export default class News extends Component {
     return (
       <div className="container">
         <div className="row">
+          <h1 className="text-center my-3">INSA NEWS</h1>
+
           {this.state.articles.map((element) => {
             return (
               <div className="col-4" key={element.url}>
