@@ -60,31 +60,6 @@ export default class News extends Component {
     let parseData = await data.json();
     this.setState({ articles: parseData.articles });
   }
-  handlPervClick = async () => {
-    console.log("prev");
-    let apiurl = `https://newsapi.org/v2/top-headlines?country=us&category=${
-      this.props.category
-    }&apiKey=be308d15421f46afbe4ec30ce9d67f54&page=${this.state.page - 1}`;
-    let data = await fetch(apiurl);
-    let parseData = await data.json();
-    this.setState({
-      page: this.state.page - 1,
-      articles: parseData.articles,
-    });
-  };
-  handlNextClick = async () => {
-    console.log("next");
-    let apiurl = `https://newsapi.org/v2/top-headlines?country=us&category=${
-      this.props.category
-    }&apiKey=be308d15421f46afbe4ec30ce9d67f54&page=${this.state.page + 1}`;
-    let data = await fetch(apiurl);
-    let parseData = await data.json();
-    this.setState({
-      page: this.state.page + 1,
-      articles: parseData.articles,
-    });
-  };
-
   render() {
     return (
       <div className="container">
@@ -103,19 +78,6 @@ export default class News extends Component {
               </div>
             );
           })}
-        </div>
-        <div className="container d-flex justify-content-between">
-          <button
-            disabled={this.state.page <= 1}
-            className="btn btn-primary"
-            onClick={this.handlPervClick}
-            type="button"
-          >
-            &larr; Pervoius
-          </button>
-          <button className="btn btn-primary" onClick={this.handlNextClick}>
-            Next &rarr;
-          </button>
         </div>
       </div>
     );
